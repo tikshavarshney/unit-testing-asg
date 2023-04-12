@@ -1,4 +1,4 @@
-package com.demo.service;
+package com.demo.service.JUnitTest;
 
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;

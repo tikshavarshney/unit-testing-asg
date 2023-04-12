@@ -1,0 +1,34 @@
+package com.demo.service.MockitoTest;
+
+import org.junit.runner.RunWith;
+import org.mockito.runners.MockitoJUnitRunner;
+
+@RunWith(MockitoJUnitRunner.class)
+public class OrderServiceTestUsingMockito
+{
+    @Mock
+    EmailService emailServiceMock;
+
+    @InjectMocks
+    OrderService orderService;
+
+    @Test(expected = RuntimeException.class)
+    public void testPlaceOrder_SetCustomerNotifiedTrue()
+    {
+        Order order1 = new Order(2, "Sofa" , 5000);
+        when(orderService.placeOrder(order1)).thenReturn(new RuntimeException("An Exception Occurred")).thenReturn(true);
+        orderService.placeOrder(order1);
+        boolean answer = order.isCustomerNotified();
+        assertThat(answer, is(true));
+    }
+
+    @Test
+    public void testPlaceOrder_ReturningIsNotified()
+    {
+        Order order2 = new Order(2, "Table" , 2500);
+        given(orderService.placeOrder(order2, anyString())).willReturn(true);
+        boolean answer = orderService.placeOrder(order2, "Dummy");
+        assertThat(answer, is(true));
+    }
+
+}

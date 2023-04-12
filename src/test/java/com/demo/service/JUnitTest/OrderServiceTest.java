@@ -1,4 +1,4 @@
-package com.demo.service;
+package com.demo.service.JUnitTest;
 
 public class OrderServiceTest
 {

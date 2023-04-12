@@ -1,0 +1,25 @@
+package com.demo.service.MockitoTest;
+
+import org.junit.runner.RunWith;
+import org.mockito.runners.MockitoJUnitRunner;
+
+public class EmailServiceTestUsingMockito
+{
+
+    @Test(expected = RuntimeException.class)
+    public void testSendEmail_ThrowException()
+    {
+        EmailService emailServiceMock = mock(EmailService.class);
+        when(emailServiceMock.sendEmail(new Order())).thenThrow(new RuntimeException("An Exception Occurred"));
+        emailServiceMock.sendEmail(new Order());
+    }
+
+    @Test
+    public void testSendEmail_ReturningTrue()
+    {
+        EmailService emailServiceMock = mock(EmailService.class);
+        given(emailServiceMock.sendEmail(new Order(), anyString())).willReturn(true);
+        boolean result = emailServiceMock.sendEmail(new Order(), "Dummy");
+        assertThat(result, is(true));
+    }
+}
